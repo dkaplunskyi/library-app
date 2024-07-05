@@ -100,6 +100,9 @@ form label[for='isFinished'] {
 }
 
 .card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
   background-color: white;
   border-radius: 5px;
@@ -110,9 +113,76 @@ form label[for='isFinished'] {
   list-style: none;
 }
 
+.card-item div{
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.card-item div button{
+  color: #686868;
+  padding: 5px 10px;
+  border: 1px solid #afafaf;
+  border-radius: 15px;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.card-item div .delete-btn:hover{
+  color: red;
+  border-color: red;
+  background-color: rgb(255, 219, 219);
+}
+
+.card-item div .edit-btn:hover{
+  color: darkblue;
+  border-color: #76b3f9;
+  background-color: #76b3f9;
+}
+
 .output {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 1fr;
   grid-gap: 40px;
+}
+
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-label::after {
+  content: "";
+  width: 26px;
+  height: 26px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+}
+
+.toggle-checkbox:checked+.toggle-label {
+  background-color: #4caf50;
+}
+
+.toggle-checkbox:checked+.toggle-label::after {
+  transform: translateX(30px);
 }

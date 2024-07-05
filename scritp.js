@@ -6,6 +6,7 @@ const output = document.querySelector('.output');
 const submitBtn = document.querySelector('#submit');
 const closeDialogBtn = document.querySelector('.close-btn');
 const dialog = document.querySelector('#dialog');
+const toggle = document.getElementById('toggle');
 
 const addBook = document.querySelector('#addBook');
 
@@ -33,7 +34,7 @@ function addBookToLibrary() {
   }
 
   // add new book to the book library array
-  myLibrary.push(new Book(title.value, author.value, pages.value, isFinished.checked));
+  myLibrary.push(new Book(title.value, author.value, pages.value, toggle.value));
 
   // display books item
   display(myLibrary);
@@ -51,6 +52,22 @@ function display(array) {
       ul.appendChild(li);
     }
     card.appendChild(ul);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.classList = 'delete-btn';
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.classList = 'edit-btn';
+
+
+    const buttonsWrapper = document.createElement('div');
+    buttonsWrapper.appendChild(deleteBtn);
+    buttonsWrapper.appendChild(editBtn);
+
+    card.appendChild(buttonsWrapper);
+
     card.classList.add('card-item')
     output.appendChild(card);
   });
@@ -70,4 +87,18 @@ submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
   addBookToLibrary();
   dialog.close();
+});
+
+// toggle button of the dialog
+toggle.addEventListener('change', function () {
+  if (this.checked) {
+    console.log('Toggle is ON');
+    // Add your "ON" code here
+    toggle.value = 'finished';
+  } else {
+    console.log('Toggle is OFF');
+    // Add your "OFF" code here
+    toggle.value = 'not finished'
+
+  }
 });
