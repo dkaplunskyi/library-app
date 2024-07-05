@@ -10,27 +10,33 @@
 </head>
 
 <body>
+  <div class="container">
+    <div id="addBook"></div>
 
-  <div class="addBook"></div>
+    <dialog id="dialog">
+      <div><span class="close-btn">&times;</span></div>
+      <form action="" method="POST">
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author">
 
-  <form action="#" method="post">
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title">
 
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title">
+        <label for="pages">Pages</label>
+        <input type="number" name="pages" id="pages">
 
-    <label for="pages">Pages</label>
-    <input type="number" name="pages" id="pages">
+        <label for="isFinished">Read?
+        <input type="checkbox" name="isFinished" id="isFinished"></label>
 
-    <label for="isFinished">is Finished To Read?</label>
-    <input type="checkbox" name="isFinished" id="isFinished">
+        <input type="submit" value="Submit" id="submit">
+      </form>
+    </dialog>
 
-    <input type="submit" value="Submit" id="submit">
+    <div class="output"></div>
+  </div>
 
-  </form>
-  
-  <div class="output"></div>
+
+
 </body>
 
 </html>
