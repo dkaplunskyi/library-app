@@ -5,16 +5,17 @@
 }
 
 body {
-  max-width: 1200px;
   margin: 0 auto;
+  background-color: #f3f8f1;
 }
 
 .container {
   font-family: sans-serif;
   font-weight: 100;
+  max-width: 1200px;
   height: 100vh;
+  margin: 0 auto;
   padding: 40px;
-  background-color: #f3f8f1;
 }
 
 #addBook {
@@ -72,7 +73,7 @@ form input {
 
 form input[type='submit'] {
   font-size: 1.1em;
-  color: black;
+  color: #686868;
   border: 2px solid #6be93e;
   background-color: rgb(255, 255, 255);
   transition: background-color 0.3s ease-in-out;
@@ -113,13 +114,13 @@ form label[for='isFinished'] {
   list-style: none;
 }
 
-.card-item div{
+.card-item div {
   display: flex;
   flex-flow: column;
   gap: 10px;
 }
 
-.card-item div button{
+.card-item div button {
   color: #686868;
   padding: 5px 10px;
   border: 1px solid #afafaf;
@@ -127,13 +128,13 @@ form label[for='isFinished'] {
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.card-item div .delete-btn:hover{
+.card-item div .delete-btn:hover {
   color: red;
   border-color: red;
   background-color: rgb(255, 219, 219);
 }
 
-.card-item div .edit-btn:hover{
+.card-item div .edit-btn:hover {
   color: darkblue;
   border-color: #76b3f9;
   background-color: #76b3f9;
@@ -141,11 +142,18 @@ form label[for='isFinished'] {
 
 .output {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-rows: 1fr;
   grid-gap: 40px;
 }
 
+.output span{
+  font-weight: bold;
+}
+
+.output .author-style{
+  font-style: italic;
+}
 
 .toggle-container {
   display: flex;

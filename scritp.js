@@ -12,20 +12,21 @@ const addBook = document.querySelector('#addBook');
 
 const myLibrary = [];
 
-function Book(title, author, pages, isFinished) {
+function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.isFinished = isFinished;
+  this.status = status;
 }
 
-const book1 = new Book('Throne of Glass', 'Sarah J. Maas', 321, false);
-const book2 = new Book('The Godfather', '	Mario Puzo', 777, false);
-const book3 = new Book('The Godfather 2', '	Mario Puzo', 876, false);
+const book1 = new Book('Throne of Glass', 'Sarah J. Maas', 321, 'not read');
+const book2 = new Book('The Godfather', '	Mario Puzo', 777, 'read');
+const book3 = new Book('The Godfather 2', '	Mario Puzo', 876, 'read');
 myLibrary.push(book1);
 myLibrary.push(book2);
 myLibrary.push(book3);
 
+display(myLibrary);
 
 function addBookToLibrary() {
   // clear output
@@ -46,34 +47,40 @@ function display(array) {
   array.forEach(book => {
     const card = document.createElement('div');
     const ul = document.createElement('ul')
+
     for (const key in book) {
       const li = document.createElement('li');
-      li.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)} - ${book[key]}`;
+      li.innerHTML = `<span>${key.charAt(0).toUpperCase() + key.slice(1)}</span>:  ${book[key]}`;
+      if (key === 'author') {
+        li.classList = 'author-style';
+      }
       ul.appendChild(li);
     }
+
     card.appendChild(ul);
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.classList = 'delete-btn';
-
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    editBtn.classList = 'edit-btn';
-
-
-    const buttonsWrapper = document.createElement('div');
-    buttonsWrapper.appendChild(deleteBtn);
-    buttonsWrapper.appendChild(editBtn);
-
-    card.appendChild(buttonsWrapper);
-
+    card.appendChild(createDeleteEditBtn());
     card.classList.add('card-item')
+
     output.appendChild(card);
   });
 }
 
-display(myLibrary);
+// create card's buttons
+function createDeleteEditBtn() {
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.classList = 'delete-btn';
+
+  const editBtn = document.createElement('button');
+  editBtn.textContent = 'Edit';
+  editBtn.classList = 'edit-btn';
+
+  const buttonsWrapper = document.createElement('div');
+  buttonsWrapper.appendChild(deleteBtn);
+  buttonsWrapper.appendChild(editBtn);
+
+  return buttonsWrapper;
+}
 
 addBook.addEventListener('click', () => {
   dialog.showModal();
@@ -94,11 +101,10 @@ toggle.addEventListener('change', function () {
   if (this.checked) {
     console.log('Toggle is ON');
     // Add your "ON" code here
-    toggle.value = 'finished';
+    toggle.value = 'read';
   } else {
     console.log('Toggle is OFF');
     // Add your "OFF" code here
-    toggle.value = 'not finished'
-
+    toggle.value = 'not read'
   }
 });
