@@ -216,7 +216,7 @@ form label[for='read-status'] {
 
 .toggle:checked,
 .toggleDialog:checked {
-  background-color: #4CD964;
+  background-color: #5ed134;
 }
 
 .toggle:checked:before,
