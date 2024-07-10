@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library App</title>
   <link rel="stylesheet" href="style.css">
-  <script defer src="scritp.js"></script>
+  <!-- <script defer src="scritp.js"></script> -->
+  <script defer src="scritpVersionTwo.js"></script>
 </head>
 
 <body>
@@ -27,8 +28,10 @@
 
         <div class="toggle-container">
           <div>Read?</div>
-          <input type="checkbox" id="toggle" class="toggle-checkbox">
-          <label for="toggle" class="toggle-label"></label>
+          <label class="switch">
+            <input type="checkbox" id="read-status" value='Yes' checked>
+            <span class="slider round"></span>
+          </label>
         </div>
 
         <input type="submit" value="Submit" id="submit">

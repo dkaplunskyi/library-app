@@ -65,7 +65,7 @@ function display(array) {
   });
 }
 
-// create card's buttons
+// // create card's buttons
 function createDeleteEditBtn() {
   const deleteBtn = document.createElement('button');
   deleteBtn.textContent = 'Delete';
