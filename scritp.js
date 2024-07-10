@@ -11,9 +11,9 @@ const submitBtn = document.querySelector('#submit');
 const output = document.querySelector('.output');
 
 const myLibrary = [
-  new Book('Throne of Glass', 'Sarah J. Maas', '321', true),
-  new Book('The Godfather', 'Mario Puzo', '777', true),
-  new Book('The Godfather 2', 'Mario Puzo', '876', false)];
+  new Book('The Godfather', 'Mario Puzo', '448', true),
+  new Book('The Godfather 2', 'Mario Puzo', '416', true),
+  new Book('The Godfather 3', 'Mario Puzo', '384', false)];
 
 let index = null;
 
@@ -78,7 +78,8 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   author.textContent = `Author: ${newAuthor}`;
   title.textContent = `Title: ${newTitle}`;
   pages.textContent = `Pages: ${newPages}`;
-  labelForReadStatus.textContent = `Read status: ${newReadStatus}`;
+  labelForReadStatus.textContent = `Already read: `;
+  // labelForReadStatus.textContent = `Read status: ${newReadStatus}`;
   readStatus.checked = newReadStatus;
   // add tag's attributes
   readStatus.setAttribute('data-index', index);

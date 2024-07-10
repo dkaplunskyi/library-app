@@ -127,7 +127,6 @@ form label[for='read-status'] {
 
 .card-item div {
   display: flex;
-  /* flex-flow: column; */
   gap: 10px;
 }
 
@@ -151,6 +150,7 @@ form label[for='read-status'] {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-rows: 1fr;
   grid-gap: 40px;
+  padding: 0 40px;
 }
 
 .output .author{
