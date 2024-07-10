@@ -20,17 +20,17 @@ function Book(title, author, pages, readStatus) {
   this.author = author;
   this.pages = pages;
   this.readStatus = readStatus;
-}
+};
 
 Book.prototype.index = null;
 
 addBookBtn.addEventListener('click', () => {
   dialog.showModal();
-})
+});
 
 closeDialogBtn.addEventListener('click', () => {
   dialog.close();
-})
+});
 
 submitBtn.addEventListener('click', (event) => {
   event.preventDefault();
@@ -38,7 +38,7 @@ submitBtn.addEventListener('click', (event) => {
   printLibrary();
   clearDialog();
   dialog.close();
-})
+});
 
 function addBookToLibrary() {
   myLibrary.push(new Book(author.value, title.value, pages.value, readStatus.checked));
@@ -56,7 +56,8 @@ function printLibrary() {
   })
 
   toggleStatus();
-}
+  deleteBook();
+};
 
 //create a card item
 function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
@@ -74,11 +75,12 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   author.textContent = `Author: ${newAuthor}`;
   title.textContent = `Title: ${newTitle}`;
   pages.textContent = `Pages: ${newPages}`;
-  labelForReadStatus.textContent = `Read status: `;
+  labelForReadStatus.textContent = `Read status: ${newReadStatus}`;
   readStatus.checked = newReadStatus;
   // add tag's attributes
   readStatus.setAttribute('data-index', index);
   readStatus.setAttribute('type', 'checkbox');
+  deleteIcon.setAttribute('data-index', index);
   editIcon.setAttribute('src', 'img/edit.svg');
   editIcon.setAttribute('alt', 'edit icon image');
   deleteIcon.setAttribute('src', 'img/delete.svg');
@@ -88,11 +90,11 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   readStatus.classList.add('toggle');
   card.classList.add('card-item');
   btnWrapper.classList.add('btn-wrapper');
+  deleteIcon.classList.add('delete-book-btn');
   // add css properties
   labelForReadStatus.style.display = 'flex';
   labelForReadStatus.style.justifyContent = 'space-between';
   labelForReadStatus.style.alignItems = 'center';
-
 
   // put everything together
   btnWrapper.append(editIcon, deleteIcon);
@@ -100,7 +102,7 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   card.append(btnWrapper, author, title, pages, labelForReadStatus);
 
   return card;
-}
+};
 
 function toggleStatus() {
   const checkboxes = document.querySelectorAll('.toggle');
@@ -112,14 +114,26 @@ function toggleStatus() {
       printLibrary();
     })
   });
-}
+};
+
+function deleteBook() {
+  const deleteBookButtons = document.querySelectorAll('.delete-book-btn');
+  deleteBookButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      let index = e.target.getAttribute('data-index');
+      myLibrary.splice(index, 1);
+
+      printLibrary();
+    });
+  });
+};
 
 function clearDialog() {
   author.value = '';
   title.value = '';
   pages.value = '';
   readStatus.checked = true;
-}
+};
 
 printLibrary();
 

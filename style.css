@@ -16,7 +16,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/bg.jpg') no-repeat center center / cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.25)), url('img/bg.jpg') no-repeat center center / cover;
   z-index: -1;
   /* Ensure the background image is behind the content */
 }
@@ -29,13 +29,12 @@ body::before {
   max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 40px;
 }
 
 #addBook {
   width: 160px;
   height: 160px;
-  margin: 0px auto 40px;
+  margin: 40px auto;
   border: 3px solid #6be93e;
   border-radius: 50%;
   background-image: url(img/file-plus.svg);
@@ -85,18 +84,17 @@ form input {
   border-radius: 7px;
 }
 
-/* form input[type='submit'] {
+form input[type='submit'] {
   font-size: 1.1em;
   color: #686868;
-  border: 2px solid #6be93e;
+  border: 2px solid #96f474;
   background-color: rgb(255, 255, 255);
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 form input[type='submit']:hover {
-
-  background-color: #ccffba;
-} */
+  background-color: #96f474;
+}
 
 
 form label[for='isFinished'] {
