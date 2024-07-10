@@ -12,8 +12,10 @@ const output = document.querySelector('.output');
 
 const myLibrary = [
   new Book('Throne of Glass', 'Sarah J. Maas', '321', true),
-  new Book('The Godfather', '	Mario Puzo', '777', true),
-  new Book('The Godfather 2', '	Mario Puzo', '876', false)];
+  new Book('The Godfather', 'Mario Puzo', '777', true),
+  new Book('The Godfather 2', 'Mario Puzo', '876', false)];
+
+let index = null;
 
 function Book(title, author, pages, readStatus) {
   this.title = title;
@@ -57,6 +59,7 @@ function printLibrary() {
 
   toggleStatus();
   deleteBook();
+  editBook();
 };
 
 //create a card item
@@ -80,6 +83,7 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   // add tag's attributes
   readStatus.setAttribute('data-index', index);
   readStatus.setAttribute('type', 'checkbox');
+  editIcon.setAttribute('data-index', index);
   deleteIcon.setAttribute('data-index', index);
   editIcon.setAttribute('src', 'img/edit.svg');
   editIcon.setAttribute('alt', 'edit icon image');
@@ -87,10 +91,15 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   deleteIcon.setAttribute('alt', 'delete icon image');
 
   // add a class name
+  author.classList.add('author');
+  title.classList.add('title');
+  pages.classList.add('pages');
+  labelForReadStatus.classList.add('read-status');
   readStatus.classList.add('toggle');
   card.classList.add('card-item');
   btnWrapper.classList.add('btn-wrapper');
   deleteIcon.classList.add('delete-book-btn');
+  editIcon.classList.add('edit-book-btn');
   // add css properties
   labelForReadStatus.style.display = 'flex';
   labelForReadStatus.style.justifyContent = 'space-between';
@@ -127,6 +136,48 @@ function deleteBook() {
     });
   });
 };
+
+function editBook() {
+  const editBookButtons = document.querySelectorAll('.edit-book-btn');
+  editBookButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      index = e.target.getAttribute('data-index');
+
+      dialog.showModal();
+      author.value = myLibrary[index].author;
+      title.value = myLibrary[index].title;
+      pages.value = myLibrary[index].pages;
+      readStatus.checked = myLibrary[index].readStatus;
+
+      submitBtn.replaceWith(createSaveBtn());
+
+      printLibrary();
+    });
+  });
+}
+const saveBtn = document.createElement('input');
+saveBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log(index);
+
+  myLibrary[index].author = author.value;
+  myLibrary[index].title = title.value;
+  myLibrary[index].pages = pages.value;
+  myLibrary[index].readStatus = readStatus.checked;
+
+  saveBtn.replaceWith(submitBtn);
+  dialog.close();
+  clearDialog();
+  printLibrary();
+})
+
+function createSaveBtn() {
+  saveBtn.setAttribute('type', 'submit');
+  saveBtn.value = 'Save';
+  saveBtn.classList.add('save-btn');
+
+  return saveBtn;
+}
 
 function clearDialog() {
   author.value = '';
