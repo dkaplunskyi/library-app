@@ -1,88 +1,30 @@
+const addBookBtn = document.querySelector('#addBook');
+
+const dialog = document.querySelector('#dialog');
 const author = document.querySelector('#author');
 const title = document.querySelector('#title');
 const pages = document.querySelector('#pages');
-const isFinished = document.querySelector('#isFinished');
-const output = document.querySelector('.output');
-const submitBtn = document.querySelector('#submit');
+const readStatus = document.querySelector('#read-status');
 const closeDialogBtn = document.querySelector('.close-btn');
-const dialog = document.querySelector('#dialog');
-const toggle = document.getElementById('toggle');
+const submitBtn = document.querySelector('#submit');
 
-const addBook = document.querySelector('#addBook');
+const output = document.querySelector('.output');
 
-const myLibrary = [];
+const myLibrary = [
+  new Book('Throne of Glass', 'Sarah J. Maas', '321', true),
+  new Book('The Godfather', '	Mario Puzo', '777', true),
+  new Book('The Godfather 2', '	Mario Puzo', '876', false)];
 
-function Book(title, author, pages, status) {
+function Book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = status;
+  this.readStatus = readStatus;
 }
 
-const book1 = new Book('Throne of Glass', 'Sarah J. Maas', 321, 'not read');
-const book2 = new Book('The Godfather', '	Mario Puzo', 777, 'read');
-const book3 = new Book('The Godfather 2', '	Mario Puzo', 876, 'read');
-myLibrary.push(book1);
-myLibrary.push(book2);
-myLibrary.push(book3);
+Book.prototype.index = null;
 
-display(myLibrary);
-
-function addBookToLibrary() {
-  // clear output
-  while (output.firstChild) {
-    output.removeChild(output.firstChild);
-  }
-
-  // add new book to the book library array
-  myLibrary.push(new Book(title.value, author.value, pages.value, toggle.value));
-
-  // display books item
-  display(myLibrary);
-}
-
-// create a card for each book item
-// and display them in the output
-function display(array) {
-  array.forEach(book => {
-    const card = document.createElement('div');
-    const ul = document.createElement('ul')
-
-    for (const key in book) {
-      const li = document.createElement('li');
-      li.innerHTML = `<span>${key.charAt(0).toUpperCase() + key.slice(1)}</span>:  ${book[key]}`;
-      if (key === 'author') {
-        li.classList = 'author-style';
-      }
-      ul.appendChild(li);
-    }
-
-    card.appendChild(ul);
-    card.appendChild(createDeleteEditBtn());
-    card.classList.add('card-item')
-
-    output.appendChild(card);
-  });
-}
-
-// // create card's buttons
-function createDeleteEditBtn() {
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Delete';
-  deleteBtn.classList = 'delete-btn';
-
-  const editBtn = document.createElement('button');
-  editBtn.textContent = 'Edit';
-  editBtn.classList = 'edit-btn';
-
-  const buttonsWrapper = document.createElement('div');
-  buttonsWrapper.appendChild(deleteBtn);
-  buttonsWrapper.appendChild(editBtn);
-
-  return buttonsWrapper;
-}
-
-addBook.addEventListener('click', () => {
+addBookBtn.addEventListener('click', () => {
   dialog.showModal();
 })
 
@@ -90,21 +32,78 @@ closeDialogBtn.addEventListener('click', () => {
   dialog.close();
 })
 
-submitBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+submitBtn.addEventListener('click', (event) => {
+  event.preventDefault();
   addBookToLibrary();
+  printLibrary();
   dialog.close();
-});
+})
 
-// toggle button of the dialog
-toggle.addEventListener('change', function () {
-  if (this.checked) {
-    console.log('Toggle is ON');
-    // Add your "ON" code here
-    toggle.value = 'read';
-  } else {
-    console.log('Toggle is OFF');
-    // Add your "OFF" code here
-    toggle.value = 'not read'
-  }
-});
+function addBookToLibrary() {
+  myLibrary.push(new Book(author.value, title.value, pages.value, readStatus.checked));
+}
+
+function printLibrary() {
+  // clear output
+  output.innerHTML = '';
+  myLibrary.forEach((book, index) => {
+    // assign index
+    book.index = index;
+    // create a card 
+    const card = createCard(book.author, book.title, book.pages, book.readStatus, index);
+    output.appendChild(card);
+  })
+
+  toggleStatus();
+}
+
+//create a card item
+function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
+  //create card's elements
+  const card = document.createElement('div');
+  const author = document.createElement('div');
+  const title = document.createElement('div');
+  const pages = document.createElement('div');
+  const labelForReadStatus = document.createElement('label');
+  const readStatus = document.createElement('input');
+  // assign data to the elements
+  author.textContent = `Author: ${newAuthor}`;
+  title.textContent = `Title: ${newTitle}`;
+  pages.textContent = `Pages: ${newPages}`;
+  labelForReadStatus.textContent = `Read status: `;
+  readStatus.checked = newReadStatus;
+
+  readStatus.setAttribute('data-index', index);
+  readStatus.setAttribute('type', 'checkbox');
+  readStatus.classList.add('toggle');
+
+  card.classList.add('card-item');
+
+  labelForReadStatus.style.display = 'flex';
+  labelForReadStatus.style.justifyContent = 'space-between';
+  labelForReadStatus.style.alignItems = 'center';
+
+
+  // put everything together
+  labelForReadStatus.appendChild(readStatus);
+  card.append(author, title, pages, labelForReadStatus);
+
+  return card;
+}
+
+function toggleStatus() {
+  const checkboxes = document.querySelectorAll('.toggle');
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('click', (e) => {
+      let index = e.target.getAttribute('data-index');
+      myLibrary[index].readStatus = !myLibrary[index].readStatus;
+
+      printLibrary();
+    })
+  });
+}
+
+
+
+printLibrary();
+

@@ -7,7 +7,7 @@
   <title>Library App</title>
   <link rel="stylesheet" href="style.css">
   <!-- <script defer src="scritp.js"></script> -->
-  <script defer src="scritpVersionTwo.js"></script>
+  <script defer src="scritp.js"></script>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 
     <dialog id="dialog">
       <div><span class="close-btn">&times;</span></div>
-      <form action="" method="POST">
+      <form action="#" method="POST" id="myForm">
         <label for="author">Author</label>
         <input type="text" name="author" id="author">
 
@@ -26,13 +26,9 @@
         <label for="pages">Pages</label>
         <input type="number" name="pages" id="pages">
 
-        <div class="toggle-container">
-          <div>Read?</div>
-          <label class="switch">
-            <input type="checkbox" id="read-status" value='Yes' checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
+        <label for="read-status">Read?
+          <input type="checkbox" name="read-status" id="read-status" checked>
+        </label>
 
         <input type="submit" value="Submit" id="submit">
       </form>
@@ -40,9 +36,6 @@
 
     <div class="output"></div>
   </div>
-
-
-
 </body>
 
 </html>
