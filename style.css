@@ -30,12 +30,13 @@ body::before {
   max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
+  padding-top: 40px;
 }
 
 #addBook {
   width: 160px;
   height: 160px;
-  margin: 40px auto;
+  margin: 0px auto 40px;
   border: 3px solid #6be93e;
   border-radius: 50%;
   background-image: url(img/file-plus.svg);
