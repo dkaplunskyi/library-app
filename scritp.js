@@ -36,6 +36,7 @@ submitBtn.addEventListener('click', (event) => {
   event.preventDefault();
   addBookToLibrary();
   printLibrary();
+  clearDialog();
   dialog.close();
 })
 
@@ -66,27 +67,37 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   const pages = document.createElement('div');
   const labelForReadStatus = document.createElement('label');
   const readStatus = document.createElement('input');
+  const editIcon = document.createElement('img');
+  const deleteIcon = document.createElement('img');
+  const btnWrapper = document.createElement('span');
   // assign data to the elements
   author.textContent = `Author: ${newAuthor}`;
   title.textContent = `Title: ${newTitle}`;
   pages.textContent = `Pages: ${newPages}`;
   labelForReadStatus.textContent = `Read status: `;
   readStatus.checked = newReadStatus;
-
+  // add tag's attributes
   readStatus.setAttribute('data-index', index);
   readStatus.setAttribute('type', 'checkbox');
+  editIcon.setAttribute('src', 'img/edit.svg');
+  editIcon.setAttribute('alt', 'edit icon image');
+  deleteIcon.setAttribute('src', 'img/delete.svg');
+  deleteIcon.setAttribute('alt', 'delete icon image');
+
+  // add a class name
   readStatus.classList.add('toggle');
-
   card.classList.add('card-item');
-
+  btnWrapper.classList.add('btn-wrapper');
+  // add css properties
   labelForReadStatus.style.display = 'flex';
   labelForReadStatus.style.justifyContent = 'space-between';
   labelForReadStatus.style.alignItems = 'center';
 
 
   // put everything together
+  btnWrapper.append(editIcon, deleteIcon);
   labelForReadStatus.appendChild(readStatus);
-  card.append(author, title, pages, labelForReadStatus);
+  card.append(btnWrapper, author, title, pages, labelForReadStatus);
 
   return card;
 }
@@ -103,7 +114,12 @@ function toggleStatus() {
   });
 }
 
-
+function clearDialog() {
+  author.value = '';
+  title.value = '';
+  pages.value = '';
+  readStatus.checked = true;
+}
 
 printLibrary();
 

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library App</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <script defer src="scritp.js"></script> -->
   <script defer src="scritp.js"></script>
 </head>
 
@@ -16,7 +15,7 @@
 
     <dialog id="dialog">
       <div><span class="close-btn">&times;</span></div>
-      <form action="#" method="POST" id="myForm">
+      <form action="" method="POST">
         <label for="author">Author</label>
         <input type="text" name="author" id="author">
 
@@ -26,9 +25,11 @@
         <label for="pages">Pages</label>
         <input type="number" name="pages" id="pages">
 
-        <label for="read-status">Read?
-          <input type="checkbox" name="read-status" id="read-status" checked>
-        </label>
+        <div class="toggle-container">
+          <div>Read?</div>
+          <input type="checkbox" id="toggle" class="toggle-checkbox">
+          <label for="toggle" class="toggle-label"></label>
+        </div>
 
         <input type="submit" value="Submit" id="submit">
       </form>
@@ -36,6 +37,9 @@
 
     <div class="output"></div>
   </div>
+
+
+
 </body>
 
 </html>
