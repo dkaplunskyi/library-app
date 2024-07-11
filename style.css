@@ -94,13 +94,13 @@ form input {
 form input[type='submit'] {
   font-size: 1.1em;
   color: #686868;
-  border: 2px solid #96f474;
+  border: 2px solid #51e634;
   background-color: rgb(255, 255, 255);
   transition: all 0.3s ease-in-out;
 }
 
 form input[type='submit']:hover {
-  background-color: #96f474;
+  background-color: #51e634;
 }
 
 
@@ -227,7 +227,7 @@ form label[for='read-status'] {
 
 .toggle:checked,
 .toggleDialog:checked {
-  background-color: #5ed134;
+  background-color: #51e634;
 }
 
 .toggle:checked:before,
