@@ -10,27 +10,29 @@ const submitBtn = document.querySelector('#submit');
 
 const output = document.querySelector('.output');
 
+
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+  }
+
+  index = null
+}
+
 const myLibrary = [
-  new Book('The Godfather', 'Mario Puzo', '448', true),
-  new Book('The Godfather 2', 'Mario Puzo', '416', true),
-  new Book('The Godfather 3', 'Mario Puzo', '384', false)];
-
-let index = null;
-
-function Book(title, author, pages, readStatus) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
-};
-
-Book.prototype.index = null;
+  new Book('The Godfather I', 'Mario Puzo', '448', true),
+  new Book('The Godfather II', 'Mario Puzo', '416', true),
+  new Book('The Godfather III', 'Mario Puzo', '384', false)];
 
 addBookBtn.addEventListener('click', () => {
   dialog.showModal();
 });
 
 closeDialogBtn.addEventListener('click', () => {
+  clearDialog();
   dialog.close();
 });
 
@@ -57,9 +59,9 @@ function printLibrary() {
     output.appendChild(card);
   })
 
-  toggleStatus();
-  deleteBook();
-  editBook();
+  // toggleStatus();
+  // deleteBook();
+  // editBook();
 };
 
 //create a card item
@@ -111,6 +113,10 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   labelForReadStatus.appendChild(readStatus);
   card.append(btnWrapper, author, title, pages, labelForReadStatus);
 
+  toggleStatus();
+  deleteBook();
+  editBook();
+
   return card;
 };
 
@@ -159,7 +165,6 @@ function editBook() {
 const saveBtn = document.createElement('input');
 saveBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  console.log(index);
 
   myLibrary[index].author = author.value;
   myLibrary[index].title = title.value;

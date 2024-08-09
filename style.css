@@ -158,10 +158,11 @@ form label[for='read-status'] {
 
 .output {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
   grid-auto-rows: 1fr;
   grid-gap: 40px;
   padding: 0 40px;
+  justify-content: center;
 }
 
 .output .author {
