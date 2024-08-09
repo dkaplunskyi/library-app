@@ -59,9 +59,9 @@ function printLibrary() {
     output.appendChild(card);
   })
 
-  // toggleStatus();
-  // deleteBook();
-  // editBook();
+  toggleStatus();
+  deleteBook();
+  editBook();
 };
 
 //create a card item
@@ -112,10 +112,6 @@ function createCard(newAuthor, newTitle, newPages, newReadStatus, index) {
   btnWrapper.append(editIcon, deleteIcon);
   labelForReadStatus.appendChild(readStatus);
   card.append(btnWrapper, author, title, pages, labelForReadStatus);
-
-  toggleStatus();
-  deleteBook();
-  editBook();
 
   return card;
 };
