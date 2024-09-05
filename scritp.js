@@ -19,6 +19,14 @@ class Book {
     this.readStatus = readStatus;
   }
 
+  info = function () {
+    if (this.readStatus) {
+      return `${this.title} by ${this.author}, ${this.pages} pages, already readed`;
+    } else {
+      return `${this.title} by ${this.author}, ${this.pages} pages, not read yet`;
+    }
+  }
+
   index = null
 }
 
